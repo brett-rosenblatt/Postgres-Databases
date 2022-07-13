@@ -1,0 +1,18 @@
+-- ----------------------------------------------------------------
+--  TABLE data_share_rule
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.data_share_rule
+(
+   id            INTEGER
+                   NOT NULL DEFAULT nextval ('data_share_rule_id_seq'::regclass),
+   "name"        CHARACTER VARYING NOT NULL,
+   created_at    TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at    TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   preset        CHARACTER VARYING NULL,
+   CONSTRAINT data_share_rule_name_key UNIQUE ("name")
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT data_share_rule_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

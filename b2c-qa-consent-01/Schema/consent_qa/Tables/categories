@@ -1,0 +1,15 @@
+-- ----------------------------------------------------------------
+--  TABLE categories
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.categories
+(
+   id             INTEGER NOT NULL DEFAULT nextval ('categories_id_seq'::regclass),
+   "name"         CHARACTER VARYING NOT NULL,
+   description    CHARACTER VARYING NULL,
+   CONSTRAINT categories_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT categories_name_key UNIQUE ("name")
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

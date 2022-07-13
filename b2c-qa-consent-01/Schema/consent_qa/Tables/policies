@@ -1,0 +1,31 @@
+-- ----------------------------------------------------------------
+--  TABLE policies
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.policies
+(
+   id                            INTEGER NOT NULL DEFAULT nextval ('policies_id_seq'::regclass),
+   "name"                        CHARACTER VARYING NOT NULL,
+   uuid4                         uuid NOT NULL DEFAULT public.uuid_generate_v4 (),
+   version                       DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+   version_description           CHARACTER VARYING NULL,
+   date_start                    TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   date_end                      TIMESTAMP (6) NULL,
+   repeat_days                   INTEGER NULL DEFAULT 0,
+   locale                        CHARACTER VARYING NOT NULL,
+   "text"                        CHARACTER VARYING NOT NULL,
+   policy_type_id                INTEGER NULL,
+   is_draft                      BOOLEAN NULL DEFAULT FALSE,
+   consent_major_version_only    BOOLEAN NULL DEFAULT FALSE,
+   is_active                     BOOLEAN NULL DEFAULT TRUE,
+   CONSTRAINT policies_policy_type_id_fkey FOREIGN KEY
+      (policy_type_id)
+      REFERENCES consent_schema.policy_types (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policies_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

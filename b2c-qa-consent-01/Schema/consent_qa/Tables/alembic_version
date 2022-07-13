@@ -1,0 +1,11 @@
+-- ----------------------------------------------------------------
+--  TABLE alembic_version
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.alembic_version
+(
+   version_num    CHARACTER VARYING (32) NOT NULL,
+   CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

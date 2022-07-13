@@ -1,0 +1,16 @@
+-- ----------------------------------------------------------------
+--  TABLE privacy_request_log
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.privacy_request_log
+(
+   id                INTEGER
+                       NOT NULL DEFAULT nextval ('privacy_request_log_id_seq'::regclass),
+   requester         CHARACTER VARYING NOT NULL,
+   request_args      jsonb NOT NULL,
+   request_result    jsonb NOT NULL,
+   created_at        TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   CONSTRAINT privacy_request_log_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

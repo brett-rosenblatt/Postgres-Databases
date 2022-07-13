@@ -1,0 +1,14 @@
+-- ----------------------------------------------------------------
+--  TABLE policy_types
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.policy_types
+(
+   id        INTEGER NOT NULL DEFAULT nextval ('policy_types_id_seq'::regclass),
+   "name"    CHARACTER VARYING NOT NULL,
+   CONSTRAINT policy_types_name_key UNIQUE ("name")
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policy_types_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

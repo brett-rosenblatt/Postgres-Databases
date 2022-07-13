@@ -1,0 +1,31 @@
+-- ----------------------------------------------------------------
+--  TABLE apps_policies
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.apps_policies
+(
+   id              INTEGER
+                     NOT NULL
+                     DEFAULT nextval (
+                                'flows_rules_policies_associations_id_seq'::regclass),
+   flow_id         INTEGER NULL,
+   policy_uuid4    uuid NOT NULL,
+   app_id          INTEGER NULL,
+   CONSTRAINT apps_policies_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT apps_policies_app_id_fkey FOREIGN KEY
+      (app_id)
+      REFERENCES consent_schema.apps (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT apps_policies_flow_id_fkey FOREIGN KEY
+      (flow_id)
+      REFERENCES consent_schema.flows (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

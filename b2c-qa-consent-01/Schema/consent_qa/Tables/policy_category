@@ -1,0 +1,24 @@
+-- ----------------------------------------------------------------
+--  TABLE policy_category
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.policy_category
+(
+   id              INTEGER
+                     NOT NULL DEFAULT nextval ('policy_category_id_seq'::regclass),
+   policy_uuid4    uuid NOT NULL,
+   category_id     INTEGER NOT NULL,
+   CONSTRAINT policy_category_policy_uuid4_category_id_key UNIQUE
+      (policy_uuid4, category_id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policy_category_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policy_category_category_id_fkey FOREIGN KEY
+      (category_id)
+      REFERENCES consent_schema.categories (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

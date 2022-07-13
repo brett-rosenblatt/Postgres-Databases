@@ -1,0 +1,14 @@
+-- ----------------------------------------------------------------
+--  TABLE apps
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.apps
+(
+   id             INTEGER NOT NULL DEFAULT nextval ('apps_id_seq'::regclass),
+   "name"         CHARACTER VARYING NOT NULL,
+   webhook_url    CHARACTER VARYING NULL,
+   CONSTRAINT apps_name_key UNIQUE ("name")
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT apps_pkey PRIMARY KEY (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

@@ -1,0 +1,18 @@
+-- ----------------------------------------------------------------
+--  TABLE policies_slug
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.policies_slug
+(
+   id             INTEGER NOT NULL DEFAULT nextval ('policies_slug_id_seq'::regclass),
+   policy_name    CHARACTER VARYING NULL,
+   policy_uuid    uuid NULL,
+   slug           CHARACTER VARYING NULL,
+   CONSTRAINT policies_slug_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policies_slug_slug_key UNIQUE (slug)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policies_slug_policy_uuid_key UNIQUE (policy_uuid)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

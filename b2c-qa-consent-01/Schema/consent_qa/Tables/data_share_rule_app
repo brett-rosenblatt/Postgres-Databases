@@ -1,0 +1,29 @@
+-- ----------------------------------------------------------------
+--  TABLE data_share_rule_app
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.data_share_rule_app
+(
+   id                    INTEGER
+                           NOT NULL DEFAULT nextval ('data_share_rule_app_id_seq'::regclass),
+   data_share_rule_id    INTEGER NOT NULL,
+   app_id                INTEGER NOT NULL,
+   created_at            TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   CONSTRAINT data_share_rule_app_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT data_share_rule_app_data_share_rule_id_fkey FOREIGN KEY
+      (data_share_rule_id)
+      REFERENCES consent_schema.data_share_rule (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT data_share_rule_app_app_id_fkey FOREIGN KEY
+      (app_id)
+      REFERENCES consent_schema.apps (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

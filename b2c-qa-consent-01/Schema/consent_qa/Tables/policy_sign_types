@@ -1,0 +1,23 @@
+-- ----------------------------------------------------------------
+--  TABLE policy_sign_types
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.policy_sign_types
+(
+   id                INTEGER
+                       NOT NULL DEFAULT nextval ('policy_sign_types_id_seq'::regclass),
+   field_type        CHARACTER VARYING NULL,
+   field_name        CHARACTER VARYING NULL,
+   policy_type_id    INTEGER NULL,
+   field_identify    CHARACTER VARYING NULL,
+   CONSTRAINT policy_sign_types_policy_type_id_fkey FOREIGN KEY
+      (policy_type_id)
+      REFERENCES consent_schema.policy_types (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT policy_sign_types_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

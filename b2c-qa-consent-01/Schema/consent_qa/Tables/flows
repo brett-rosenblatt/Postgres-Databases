@@ -1,0 +1,14 @@
+-- ----------------------------------------------------------------
+--  TABLE flows
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.flows
+(
+   id             INTEGER NOT NULL DEFAULT nextval ('flows_id_seq'::regclass),
+   "name"         CHARACTER VARYING NOT NULL,
+   description    CHARACTER VARYING NULL,
+   CONSTRAINT flows_pkey PRIMARY KEY (id) NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT flows_name_key UNIQUE ("name")
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);

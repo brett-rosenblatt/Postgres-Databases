@@ -1,0 +1,51 @@
+-- ----------------------------------------------------------------
+--  TABLE user_consents_policies
+-- ----------------------------------------------------------------
+
+CREATE TABLE consent_schema.user_consents_policies
+(
+   id                            INTEGER
+                                   NOT NULL
+                                   DEFAULT nextval ('user_consents_policies_id_seq'::regclass),
+   user_id                       INTEGER NOT NULL,
+   app_id                        INTEGER NOT NULL,
+   flow_id                       INTEGER NOT NULL,
+   policy_id                     INTEGER NOT NULL,
+   policy_uuid4                  uuid NOT NULL,
+   policy_locale                 CHARACTER VARYING NOT NULL,
+   payload                       jsonb NULL,
+   created_at                    TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   consent_major_version_only    BOOLEAN NULL DEFAULT FALSE,
+   context_app_id                INTEGER NULL,
+   CONSTRAINT user_consents_policies_policy_id_fkey FOREIGN KEY
+      (policy_id)
+      REFERENCES consent_schema.policies (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT user_consents_policies_pkey PRIMARY KEY (id)
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT user_consents_policies_app_id_fkey FOREIGN KEY
+      (app_id)
+      REFERENCES consent_schema.apps (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT user_consents_policies_flow_id_fkey FOREIGN KEY
+      (flow_id)
+      REFERENCES consent_schema.flows (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE,
+   CONSTRAINT user_consents_policies_context_app_id_fkey FOREIGN KEY
+      (context_app_id)
+      REFERENCES consent_schema.apps (id)
+         MATCH SIMPLE
+         ON DELETE NO ACTION
+         ON UPDATE NO ACTION
+      NOT DEFERRABLE INITIALLY IMMEDIATE
+)
+WITH (OIDS = FALSE);
